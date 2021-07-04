@@ -7,6 +7,10 @@ def init_db
   @db.results_as_hash=true
 end
 
+configure do
+
+end
+
 before do
   init_db
 end
