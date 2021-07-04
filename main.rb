@@ -12,6 +12,6 @@ get '/about' do
 end
 
 get '/new' do
-  @message = "There should be NEW FORM"
+  #@message = "There should be NEW FORM"
   erb :new
 end
