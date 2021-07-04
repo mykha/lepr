@@ -15,3 +15,9 @@ get '/new' do
   #@message = "There should be NEW FORM"
   erb :new
 end
+
+post '/new' do
+  con = params[:content]
+  #@message = con
+  erb con
+end
