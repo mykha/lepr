@@ -13,5 +13,5 @@ end
 
 get '/new' do
   @message = "There should be NEW FORM"
-  erb :message
+  erb :new
 end
