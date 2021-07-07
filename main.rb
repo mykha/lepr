@@ -8,7 +8,11 @@ def init_db
 end
 
 configure do
-
+  init_db
+  @db.execute 'CREATE TABLE IF NOT EXISTS posts(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_date DATE,
+            content TEXT         )'
 end
 
 before do
@@ -32,6 +36,10 @@ end
 
 post '/new' do
   con = params[:content]
-  @message = con
-  erb "You typed #{con}"
+  if con.length==0
+    @error = 'Please, type some text'
+    erb :new
+  else
+    erb "You typed #{con}"
+  end
 end
