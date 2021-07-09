@@ -48,6 +48,7 @@ post '/new' do
   end
 end
 get '/details/:id' do
-  erb "You typed #{con}"
+  @message = "You typed #{params[:id]}"
+  erb :message
 end
 
