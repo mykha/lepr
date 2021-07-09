@@ -20,6 +20,7 @@ before do
 end
 
 get '/' do
+  @results = @db.execute'select * from posts order by id desc'
   erb :index
 end
 
@@ -40,7 +41,9 @@ post '/new' do
     @error = 'Please, type some text'
     erb :new
   else
+    #saving data to db
     @db.execute 'insert into posts (content, created_date) values (?, datetime())', [con]
+    redirect to '/'
     erb "You typed #{con}"
   end
 end
