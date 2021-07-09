@@ -12,12 +12,17 @@
   </tr>
   </thead>
   <tbody>
-    <%@results.each do |post| %>
+  <% @results.each do |post| %>
     <tr>
-      <th scope="row"><%=post['id'] %></th>
-      <td><%=post['created_date']%></td>
-      <td><%=post['content']%></td>
+      <th scope="row"><%= post['id'] %></th>
+      <td><%= post['created_date'] %></td>
+      <td>
+        <a href="/details/<%= post['id'] %>">
+          <%= post['content'] %>
+        </a>
+
+      </td>
     </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>

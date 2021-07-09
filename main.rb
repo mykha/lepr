@@ -47,3 +47,7 @@ post '/new' do
     erb "You typed #{con}"
   end
 end
+get '/details/:id' do
+  erb "You typed #{con}"
+end
+
