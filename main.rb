@@ -36,10 +36,11 @@ end
 
 post '/new' do
   con = params[:content]
-  if con.length==0
+  if con.strip.empty?
     @error = 'Please, type some text'
     erb :new
   else
+    @db.execute 'insert into posts (content, created_date) values (?, datetime())', [con]
     erb "You typed #{con}"
   end
 end
