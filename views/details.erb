@@ -5,7 +5,10 @@
 <p></p>
 Added at <%=@row['created_date'] %>
 <p></p><p></p>
-<div class="form-floating">
-  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-</div>
+<form action="/details/<%=@row['id']%>" method="POST" role="form">
+  <div class="form-group">
+    <textarea name="content" class="form-control" rows="3" placeholder="Type comment text here"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Add comment</button>
+</form>
 </p>
