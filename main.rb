@@ -47,8 +47,13 @@ post '/new' do
     erb "You typed #{con}"
   end
 end
-get '/details/:id' do
-  @message = "You typed #{params[:id]}"
-  erb :message
+
+#post details information
+get '/details/:post_id' do
+  #@message = "You typed #{params[:post_id]}"
+  # post_id = params[:post_id]
+  results = @db.execute'select * from posts where id = ?', params[:post_id]
+  @row = results[0]
+  erb :details
 end
 
