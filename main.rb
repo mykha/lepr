@@ -13,6 +13,12 @@ configure do
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             created_date DATE,
             content TEXT         )'
+  @db.execute 'CREATE TABLE IF NOT EXISTS comments(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            post_id INTEGER,
+            created_date DATE,
+            content TEXT         )'
+
 end
 
 before do
@@ -51,9 +57,25 @@ end
 #post details information
 get '/details/:post_id' do
   #@message = "You typed #{params[:post_id]}"
-  # post_id = params[:post_id]
-  results = @db.execute'select * from posts where id = ?', params[:post_id]
+  post_id = params[:post_id]
+  results = @db.execute'select * from posts where id = ?', post_id
   @row = results[0]
+  @comments = @db.execute'select * from comments where post_id = ? order by id', post_id
   erb :details
+end
+
+post '/details/:post_id' do
+  con = params[:comment]
+  post_id = params[:post_id]
+  @message = "You typed #{con} to post #{post_id}"
+   if con.strip.empty?
+     @error = 'Please, type comment text'
+   else
+     #saving data to db
+     @db.execute 'insert into comments (content, created_date, post_id) values (?, datetime(), ?)', [con, post_id]
+     #erb "You typed #{con}"
+   end
+  redirect to ('/details/' + post_id)
+  #erb :message
 end
 
