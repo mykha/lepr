@@ -9,6 +9,8 @@ Added at <%=@row['created_date'] %>
   <%@comments.each do |comment| %>
   <p>
     <%=comment['content'] %>
+    <hr>
+    </hr>
   </p>
   <% end %>
 <form action="/details/<%=@row['id']%>" method="POST" role="form">
